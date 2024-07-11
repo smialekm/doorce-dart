@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:order_management/dto/order.dart';
 import 'package:order_management/view/add_order_window.dart';
 
 class PAddOrderWindow {
-  final VAddOrderWindowFactory _vAddOrderWindowFactory;
+  late final VAddOrderWindowFactory _vAddOrderWindowFactory;
 
-  const PAddOrderWindow(this._vAddOrderWindowFactory);
+  PAddOrderWindow();
+  
+  void inject (VAddOrderWindowFactory vAddOrderWindowFactory){_vAddOrderWindowFactory = vAddOrderWindowFactory;}
 
-  show(BuildContext context, List<Order> orders) {
+  show(BuildContext context){
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => _vAddOrderWindowFactory.get(orders)),
+      MaterialPageRoute(builder: (context) => _vAddOrderWindowFactory.get()),
     );
+  }
+
+  close(BuildContext context){
+    Navigator.pop(context);
   }
 }

@@ -4,17 +4,18 @@ import 'package:order_management/usecases/uc_show_order_list.dart';
 
 class CMainMenu{
 
-  final UCShowOrderList _ucShowOrderList;
-  final UCAddOrder _ucAddOrder;
+  late final UCShowOrderList _ucShowOrderList;
+  late final UCAddOrder _ucAddOrder;
 
-  const CMainMenu(this._ucShowOrderList, this._ucAddOrder);
+  CMainMenu();
+  void inject(UCShowOrderList ucShowOrderList, UCAddOrder ucAddOrder){_ucShowOrderList = ucShowOrderList; _ucAddOrder = ucAddOrder;}
 
   showOrderListSelected(BuildContext context){
     _ucShowOrderList.showOrderListSelected(context);
   }
 
   addOrderSelected(BuildContext context){
-    _ucAddOrder.submitSelected(context);
+    _ucAddOrder.addOrderSelected(context);
   }
 
 }

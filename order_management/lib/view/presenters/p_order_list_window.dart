@@ -3,8 +3,12 @@ import 'package:order_management/dto/order.dart';
 import 'package:order_management/view/order_list_window.dart';
 
 class POrderListWindow {
-  final VOrderListWindowFactory _vOrderListWindowFactory;
-  const POrderListWindow(this._vOrderListWindowFactory);
+  late final VOrderListWindowFactory _vOrderListWindowFactory;
+  
+  POrderListWindow();
+  
+  void inject(VOrderListWindowFactory vOrderListWindowFactory){_vOrderListWindowFactory = vOrderListWindowFactory;}
+  
   show(BuildContext context, List<Order> orders) {
     Navigator.push(
       context,

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:order_management/dto/order.dart';
 import 'package:order_management/view/controllers/c_add_order_window.dart';
 
 class VAddOrderWindow extends StatelessWidget {
-  VAddOrderWindow(this._cAddOrderWindow, {super.key});
+  const VAddOrderWindow(this._cAddOrderWindow, {super.key});
   static const routeName = "/add_order";
   final CAddOrderWindow _cAddOrderWindow;
-  String? _title;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +16,10 @@ class VAddOrderWindow extends StatelessWidget {
           decoration: const InputDecoration(
               labelText: 'Title', labelStyle: TextStyle(fontSize: 18)),
           initialValue: "",
-          onSaved: (val) => _title = val,
+          onChanged: (val) => _cAddOrderWindow.setTitle(val),
         ),
         ElevatedButton(
-          onPressed: () => _cAddOrderWindow.submitSelected,
+          onPressed: () => _cAddOrderWindow.submitSelected(context),
           child: const Text('Submit'),
         ),
       ],
@@ -32,5 +30,5 @@ class VAddOrderWindow extends StatelessWidget {
 class VAddOrderWindowFactory {
   const VAddOrderWindowFactory(this._cAddOrderWindow);
   final CAddOrderWindow _cAddOrderWindow;
-  VAddOrderWindow get(List<Order> orders) => VAddOrderWindow(_cAddOrderWindow);
+  VAddOrderWindow get() => VAddOrderWindow(_cAddOrderWindow);
 }

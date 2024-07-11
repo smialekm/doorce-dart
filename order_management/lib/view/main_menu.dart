@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:order_management/view/controllers/c_main_menu.dart';
 
-class VMainMenu extends StatelessWidget{
+class VMainMenu extends StatelessWidget {
   final CMainMenu _cMainMenu;
   static const routeName = "/";
 
@@ -12,12 +12,17 @@ class VMainMenu extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(title: const Text('Main Menu')),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => _cMainMenu.addOrderSelected(context),
-          child: const Text('Add order'),
-        ),
+        child: Row(children: [
+          ElevatedButton(
+            onPressed: () => _cMainMenu.addOrderSelected(context),
+            child: const Text('Add order'),
+          ),
+          ElevatedButton(
+            onPressed: () => _cMainMenu.showOrderListSelected(context),
+            child: const Text('Show orders'),
+          ),
+        ]),
       ),
     );
   }
-  
 }

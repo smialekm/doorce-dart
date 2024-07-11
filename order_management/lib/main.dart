@@ -11,22 +11,51 @@ import 'package:order_management/view/presenters/p_order_list_window.dart';
 import 'view/main_menu.dart';
 
 void main() {
+  setup();
   runApp(const MainApp());
+}
+
+late final IOrderList _iOrderList;
+
+late final CMainMenu _cMainMenu;
+late final VMainMenu _vMainMenu;
+
+late final CAddOrderWindow _cAddOrderWindow;
+late final VAddOrderWindowFactory _vAddOrderWindowFactory;
+late final PAddOrderWindow _pAddOrderWindow;
+
+late final VOrderListWindowFactory _vOrderListWindowFactory;
+late final POrderListWindow _pOrderListWindow;
+ 
+late final UCShowOrderList _ucShowOrderList;
+late final UCAddOrder _ucAddOrder;
+
+void setup(){
+  _iOrderList = OrderListMock();
+
+  _cMainMenu = CMainMenu();
+  _vMainMenu = VMainMenu(_cMainMenu);
+
+  _cAddOrderWindow = CAddOrderWindow();
+  _vAddOrderWindowFactory = VAddOrderWindowFactory(_cAddOrderWindow);
+  _pAddOrderWindow = PAddOrderWindow();
+  _pAddOrderWindow.inject(_vAddOrderWindowFactory);
+
+  _vOrderListWindowFactory = const VOrderListWindowFactory();
+  _pOrderListWindow = POrderListWindow();
+  _pOrderListWindow.inject(_vOrderListWindowFactory);
+ 
+  _ucShowOrderList = UCShowOrderList();
+  _ucShowOrderList.inject(_pOrderListWindow, _iOrderList);
+  _ucAddOrder = UCAddOrder();
+  _ucAddOrder.inject(_pAddOrderWindow, _iOrderList);
+
+  _cAddOrderWindow.inject(_ucAddOrder);
+  _cMainMenu.inject(_ucShowOrderList, _ucAddOrder);
 }
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
-
-  static const IOrderList _iOrderList = OrderListMock();
-  static const CAddOrderWindow _cAddOrderWindow = CAddOrderWindow(_ucAddOrder);
-  static const VOrderListWindowFactory _vOrderListWindowFactory = VOrderListWindowFactory();
-  static const VAddOrderWindowFactory _vAddOrderWindowFactory = VAddOrderWindowFactory(_cAddOrderWindow);
-  static const POrderListWindow _pOrderListWindow = POrderListWindow(_vOrderListWindowFactory);
-  static const PAddOrderWindow _pAddOrderWindow = PAddOrderWindow(_vAddOrderWindowFactory);
-  static const UCShowOrderList _ucShowOrderList = UCShowOrderList(_pOrderListWindow, _iOrderList);
-  static const UCAddOrder _ucAddOrder = UCAddOrder(_pAddOrderWindow, _iOrderList);
-  static const CMainMenu _cMainMenu = CMainMenu(_ucShowOrderList, _ucAddOrder);
-  static const VMainMenu _vMainMenu = VMainMenu(_cMainMenu);
 
   @override
   Widget build(BuildContext context) {

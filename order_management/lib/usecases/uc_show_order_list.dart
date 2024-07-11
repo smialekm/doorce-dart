@@ -4,10 +4,12 @@ import 'package:order_management/view/presenters/p_order_list_window.dart';
 
 class UCShowOrderList{
 
-  final POrderListWindow _pOrderListWindow;
-  final IOrderList _iOrderList;
+  late final POrderListWindow _pOrderListWindow;
+  late final IOrderList _iOrderList;
 
-  const UCShowOrderList(this._pOrderListWindow, this._iOrderList);
+  UCShowOrderList();
+  
+  void inject(POrderListWindow pOrderListWindow, IOrderList iOrderList){_pOrderListWindow = pOrderListWindow; _iOrderList = iOrderList;}
 
   showOrderListSelected(BuildContext context){
     var orders = _iOrderList.getOrders();
