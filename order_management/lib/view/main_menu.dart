@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:order_management/view/controllers/c_main_menu.dart';
 
 class VMainMenu extends StatelessWidget{
-  const VMainMenu({super.key});
+  final CMainMenu _cMainMenu;
+  static const routeName = "/";
+
+  const VMainMenu(this._cMainMenu, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(title: const Text('Main Menu')),
       body: Center(
-        child: Text('Hello World!'),
+        child: ElevatedButton(
+          onPressed: () => _cMainMenu.addOrderSelected(context),
+          child: const Text('Add order'),
+        ),
       ),
     );
   }
