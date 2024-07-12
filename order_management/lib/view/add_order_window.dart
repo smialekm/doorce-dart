@@ -10,27 +10,42 @@ class VAddOrderWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+
     return Scaffold(
-        body: Form(
-            child: Column(
-      children: [
-        TextFormField(
-          decoration: const InputDecoration(
-              labelText: 'Title', labelStyle: TextStyle(fontSize: 18)),
-          initialValue: _model.title,
-          onChanged: (val) => _model.title = val,
-        ),
-        ElevatedButton(
-          onPressed: () => _cAddOrderWindow.submitSelected(context, _model),
-          child: const Text('Submit'),
-        ),
-      ],
-    )));
+      body: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                  labelText: 'Title', labelStyle: TextStyle(fontSize: 18)),
+              validator: (val) {
+                return _model.validateTitle(val);
+              },
+              initialValue: _model.title,
+              onSaved: (val) => _model.title = val,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final form = formKey.currentState; 
+                if (form!.validate()) {
+                  form.save();
+                  _cAddOrderWindow.submitSelected(context, _model);
+                }
+              },
+              child: const Text('Submit'),
+            ),
+          ],
+        )
+      )
+    );
   }
 }
 
 class VAddOrderWindowFactory {
   const VAddOrderWindowFactory(this._cAddOrderWindow);
   final CAddOrderWindow _cAddOrderWindow;
-  VAddOrderWindow get(MAddOrderWindow model) => VAddOrderWindow(_cAddOrderWindow, model);
+  VAddOrderWindow get(MAddOrderWindow model) =>
+      VAddOrderWindow(_cAddOrderWindow, model);
 }
