@@ -5,11 +5,7 @@ import 'package:order_management/usecases/uc_show_order_list.dart';
 
 class CMainMenu{
 
-  final BuildContext _context;
-  late final UCShowOrderList _ucShowOrderList = _context.read();
-  late final UCAddOrder _ucAddOrder = _context.read();
-
-  CMainMenu(this._context);
+  const CMainMenu();
 
   showOrderListSelected(BuildContext context){
     UCShowOrderList ucs = context.read();

@@ -6,8 +6,6 @@ import 'package:provider/provider.dart';
 
 class CAddOrderWindow{
 
-  //final UCAddOrder _ucAddOrder;
-
   const CAddOrderWindow();
 
   submitSelected(BuildContext context, MAddOrderWindow model){

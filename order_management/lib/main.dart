@@ -20,38 +20,24 @@ void main() {
 MultiProvider setupDependencies(){
   List<SingleChildWidget> providerList = List<SingleChildWidget>.empty(growable: true);
 
+  // Services (access to the backend)
   providerList.add(Provider<IOrderList>(create: (context) => OrderListMock()));
-  //_iOrderList = OrderListMock();
 
-  providerList.add(Provider(create: (context) => CMainMenu(context)));
+  // View widgets with Controllers and Presenters
+  providerList.add(Provider(create: (context) => CMainMenu()));
   providerList.add(Provider(create: (context) => VMainMenuFactory(context.read())));
-  //_cMainMenu = CMainMenu();
-  //_vMainMenuFactory = VMainMenuFactory(_cMainMenu);
-
+ 
   providerList.add(Provider(create: (context) => CAddOrderWindow()));
   providerList.add(Provider(create: (context) => VAddOrderWindowFactory(context.read())));
   providerList.add(Provider(create: (context) => PAddOrderWindow(context.read())));
-  //_cAddOrderWindow = CAddOrderWindow();
-  //_vAddOrderWindowFactory = VAddOrderWindowFactory(_cAddOrderWindow);
-  //_pAddOrderWindow = PAddOrderWindow();
-  //_pAddOrderWindow.inject(_vAddOrderWindowFactory);
 
   providerList.add(Provider(create: (context) => const VOrderListWindowFactory()));
   providerList.add(Provider(create: (context) => POrderListWindow(context.read())));
-  //_vOrderListWindowFactory = const VOrderListWindowFactory();
-  //_pOrderListWindow = POrderListWindow();
-  //_pOrderListWindow.inject(_vOrderListWindowFactory);
  
+  // Use Cases
   providerList.add(Provider(create: (context) => UCShowOrderList(context.read(),context.read())));
   providerList.add(Provider(create: (context) => UCAddOrder(context.read(),context.read())));
-  //_ucShowOrderList = UCShowOrderList();
-  //_ucShowOrderList.inject(_pOrderListWindow, _iOrderList);
-  //_ucAddOrder = UCAddOrder();
-  //_ucAddOrder.inject(_pAddOrderWindow, _iOrderList);
-
-  //_cAddOrderWindow.inject(_ucAddOrder);
-  //_cMainMenu.inject(_ucShowOrderList, _ucAddOrder);
-
+  
   return MultiProvider(providers: providerList, child: const MainApp());
 }
 
