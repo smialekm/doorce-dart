@@ -26,3 +26,9 @@ class VMainMenu extends StatelessWidget {
     );
   }
 }
+
+class VMainMenuFactory{
+  const VMainMenuFactory(this._cMainMenu);
+  final CMainMenu _cMainMenu;
+  VMainMenu get() => VMainMenu(_cMainMenu);
+}

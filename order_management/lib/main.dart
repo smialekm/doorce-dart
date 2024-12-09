@@ -18,7 +18,7 @@ void main() {
 late final IOrderList _iOrderList;
 
 late final CMainMenu _cMainMenu;
-late final VMainMenu _vMainMenu;
+late final VMainMenuFactory _vMainMenuFactory;
 
 late final CAddOrderWindow _cAddOrderWindow;
 late final VAddOrderWindowFactory _vAddOrderWindowFactory;
@@ -34,7 +34,7 @@ void setup(){
   _iOrderList = OrderListMock();
 
   _cMainMenu = CMainMenu();
-  _vMainMenu = VMainMenu(_cMainMenu);
+  _vMainMenuFactory = VMainMenuFactory(_cMainMenu);
 
   _cAddOrderWindow = CAddOrderWindow();
   _vAddOrderWindowFactory = VAddOrderWindowFactory(_cAddOrderWindow);
@@ -67,7 +67,7 @@ class MainApp extends StatelessWidget {
             switch (routeSettings.name) {
               case VMainMenu.routeName: 
               default:
-                return _vMainMenu;
+                return _vMainMenuFactory.get();
             }
           },
         );
