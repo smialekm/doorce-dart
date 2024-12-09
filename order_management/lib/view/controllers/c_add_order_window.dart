@@ -5,11 +5,9 @@ import 'package:order_management/view/viewmodels/m_add_order_window.dart';
 
 class CAddOrderWindow{
 
-  late final UCAddOrder _ucAddOrder;
+  final UCAddOrder _ucAddOrder;
 
-  CAddOrderWindow();
-  
-  void inject(UCAddOrder ucAddOrder){_ucAddOrder = ucAddOrder;}
+  const CAddOrderWindow(this._ucAddOrder);
 
   submitSelected(BuildContext context, MAddOrderWindow model){
     Order order = model.getOrder();

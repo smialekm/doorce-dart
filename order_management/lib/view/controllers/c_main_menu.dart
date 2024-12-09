@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:order_management/usecases/uc_add_order.dart';
 import 'package:order_management/usecases/uc_show_order_list.dart';
 
 class CMainMenu{
 
-  late final UCShowOrderList _ucShowOrderList;
-  late final UCAddOrder _ucAddOrder;
+  final BuildContext _context;
+  late final UCShowOrderList _ucShowOrderList = _context.read();
+  late final UCAddOrder _ucAddOrder = _context.read();
 
-  CMainMenu();
-  void inject(UCShowOrderList ucShowOrderList, UCAddOrder ucAddOrder){_ucShowOrderList = ucShowOrderList; _ucAddOrder = ucAddOrder;}
+  CMainMenu(this._context);
 
   showOrderListSelected(BuildContext context){
     _ucShowOrderList.showOrderListSelected(context);

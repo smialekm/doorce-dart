@@ -5,12 +5,10 @@ import 'package:order_management/view/presenters/p_add_order_window.dart';
 
 class UCAddOrder{
 
-  late final PAddOrderWindow _pAddOrderWindow;
-  late final IOrderList _iOrderList;
+  final PAddOrderWindow _pAddOrderWindow;
+  final IOrderList _iOrderList;
 
-  UCAddOrder();
-  
-  void inject(PAddOrderWindow pAddOrderWindow, IOrderList iOrderList){_pAddOrderWindow = pAddOrderWindow; _iOrderList = iOrderList;}
+  const UCAddOrder(this._pAddOrderWindow, this._iOrderList);
 
   addOrderSelected(BuildContext context){
     _pAddOrderWindow.show(context);
