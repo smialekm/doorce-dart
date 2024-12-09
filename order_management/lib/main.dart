@@ -20,7 +20,7 @@ void main() {
 MultiProvider setupDependencies(){
   List<SingleChildWidget> providerList = List<SingleChildWidget>.empty(growable: true);
 
-  providerList.add(Provider(create: (context) => OrderListMock()));
+  providerList.add(Provider<IOrderList>(create: (context) => OrderListMock()));
   //_iOrderList = OrderListMock();
 
   providerList.add(Provider(create: (context) => CMainMenu(context)));
@@ -28,7 +28,7 @@ MultiProvider setupDependencies(){
   //_cMainMenu = CMainMenu();
   //_vMainMenuFactory = VMainMenuFactory(_cMainMenu);
 
-  providerList.add(Provider(create: (context) => CAddOrderWindow(context.read())));
+  providerList.add(Provider(create: (context) => CAddOrderWindow()));
   providerList.add(Provider(create: (context) => VAddOrderWindowFactory(context.read())));
   providerList.add(Provider(create: (context) => PAddOrderWindow(context.read())));
   //_cAddOrderWindow = CAddOrderWindow();
@@ -64,7 +64,7 @@ class MainApp extends StatelessWidget {
       onGenerateRoute: (RouteSettings routeSettings) {
         return MaterialPageRoute<void>(
           settings: routeSettings,
-          builder: (BuildContext context) {
+          builder: (context) {
             switch (routeSettings.name) {
               case VMainMenu.routeName: 
               default:

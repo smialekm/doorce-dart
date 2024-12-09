@@ -12,11 +12,13 @@ class CMainMenu{
   CMainMenu(this._context);
 
   showOrderListSelected(BuildContext context){
-    _ucShowOrderList.showOrderListSelected(context);
+    UCShowOrderList ucs = context.read();
+    ucs.showOrderListSelected(context);
   }
 
   addOrderSelected(BuildContext context){
-    _ucAddOrder.addOrderSelected(context);
+    UCAddOrder uca = context.read();
+    uca.addOrderSelected(context);
   }
 
 }
